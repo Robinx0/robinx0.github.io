@@ -39,8 +39,21 @@
         </li>
         <!-- .nav-item -->
       {% endfor %}
+
+      <li class="nav-item">
+      <a href="/assets/pdf/IrfanResume.pdf" class="nav-link">
+      <i class="fa-fw fas fa-download"></i>
+
+      {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
+      <span>My Resume</span>
+      </a>
+      </li>
     </ul>
   </nav>
+
+  <div class="d-flex justify-content-center  align-items-center w-100 pb-3" id="sidebar_htb_badge">
+    <a href="https://app.hackthebox.com/profile/badges/285798" class="nav-link"><img src="https://www.hackthebox.com/badge/image/285798" id="htb_image" alt="HTB Badge"></a>
+  </div>
 
   <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
     {% unless site.theme_mode %}
@@ -97,3 +110,10 @@
   <!-- .sidebar-bottom -->
 </aside>
 <!-- #sidebar -->
+
+<script language="javascript" type="text/javascript">
+  var d = new Date(); 
+  document.getElementById("htb_image").src = 
+    "https://www.hackthebox.com/badge/image/285798?ver=" + 
+     d.getTime();
+</script>

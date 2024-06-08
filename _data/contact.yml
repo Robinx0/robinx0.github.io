@@ -3,9 +3,12 @@
 - type: github
   icon: "fab fa-github"
 
-- type: twitter
-  icon: "fa-brands fa-x-twitter"
-
+- type: linkedin
+  icon: "fab fa-linkedin"
+  url: "https://linkedin.com/in/robinary"
+- type: medium
+  icon: "fab fa-medium"
+  url: "https://robinx0.medium.com"
 - type: email
   icon: "fas fa-envelope"
   noblank: true # open link in current tab
