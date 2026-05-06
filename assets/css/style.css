@@ -1706,6 +1706,92 @@ a.series-link:hover { color: var(--alpha); }
 @media (max-width: 600px) {
   .nav { padding: 3px; gap: 0; left: 12px; right: 12px; transform: none; }
   .nav-item { font-size: 12px; padding: 7px 13px; }
+
+  /* Page chrome */
+  .pg { padding: 0 16px 40px; }
+  .pg-title-wrap { padding: 18px 0 6px; }
+  .pg-title { font-size: clamp(30px, 9vw, 46px); letter-spacing: -1px; }
+  .pg-sub { font-size: 13px; }
+
+  /* Hero */
+  .hero { padding: 12px 0 4px; }
+  .h-name { font-size: clamp(48px, 13vw, 84px); letter-spacing: -1.5px; }
+  .h-subline { flex-wrap: wrap; row-gap: 4px; font-size: 10.5px; }
+  .h-subline .sep { display: none; }
+  .h-desc { font-size: 14px; }
+  .h-btns { flex-wrap: wrap; gap: 8px; }
+  .h-btns > * { flex: 1 1 140px; text-align: center; justify-content: center; }
+  .op-wrap { padding: 16px; }
+  .op-row { font-size: 11px; }
+
+  /* Stats strip — already 2-col at 720px; tighten further */
+  .strip-v { font-size: 24px; }
+  .strip-l { font-size: 9.5px; }
+  .strip-c { padding: 14px 12px; }
+
+  /* Writeup row — tighter on small screens */
+  .wu { padding: 10px 12px; gap: 8px; grid-template-columns: 36px 48px 1fr; }
+  .wu-idx { font-size: 10px; }
+  .wu-date { font-size: 10px; }
+  .wu-title { font-size: 13.5px; line-height: 1.35; }
+  .wu-meta { gap: 6px; flex-wrap: wrap; }
+  .wu-diff, .wu-cat { font-size: 9.5px; padding: 3px 7px; }
+
+  /* Filter / search bar */
+  .filters { padding: 10px; gap: 5px; }
+  .fb { padding: 6px 10px; font-size: 10px; letter-spacing: .5px; }
+  .filter-meta { font-size: 11px; }
+  .search-wrap { margin: 14px 0 8px; }
+  .search-input { font-size: 13px; padding: 11px 16px 11px 40px; }
+  .search-icon { left: 13px; }
+  .search-kbd { display: none; }   /* no '/' shortcut hint on touch */
+
+  /* Category chips */
+  .cat-chips { gap: 5px; }
+  .chip { padding: 6px 10px; font-size: 10px; }
+  .chip-count { font-size: 9px; padding: 2px 5px; }
+
+  /* Project / tool cards (already 1fr at 900px) */
+  .tool { padding: 16px; }
+  .tool-name { font-size: 17px; }
+  .tool-desc { font-size: 13px; }
+  .tool-feats { gap: 5px; }
+  .tool-feat { font-size: 12px; }
+
+  /* Modals — keep within viewport, full-width buttons */
+  .modal-box { padding: 18px; max-height: 90vh; }
+  .modal-box-wide { width: auto; max-width: 92vw; }
+  .modal-title { font-size: 22px; }
+  .modal-desc { font-size: 13px; }
+  .modal-actions { gap: 8px; }
+  .modal-actions > a { width: 100%; text-align: center; justify-content: center; }
+  .modal-img { aspect-ratio: 16/10; margin-bottom: 14px; }
+
+  /* Section header: stack the "View all →" link below the label */
+  .sec-hdr { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .sec-hdr .more { align-self: flex-start; }
+
+  /* About page bio + cards */
+  .bio-card { padding: 18px; }
+  .bio-name { font-size: 22px; }
+  .bio-meta { font-size: 11.5px; gap: 8px; flex-wrap: wrap; }
+  .certs-grid { grid-template-columns: 1fr; }
+
+  /* Footer */
+  .footer-sig { font-size: 11px; }
+  .footer-meta { font-size: 10.5px; flex-wrap: wrap; gap: 8px; }
+}
+
+@media (max-width: 400px) {
+  .nav-item { font-size: 11px; padding: 6px 9px; letter-spacing: .5px; }
+  .pg { padding: 0 12px 32px; }
+  .pg-title { font-size: 26px; letter-spacing: -.5px; }
+  .h-name { font-size: 42px; letter-spacing: -1px; }
+  .h-tag { font-size: 9.5px; }
+  .modal-box { padding: 14px; }
+  .modal-actions > a { padding: 9px 14px; font-size: 12px; }
+  .footer-socials { flex-wrap: wrap; gap: 6px; }
+  .strip-v { font-size: 20px; }
 }
 
 /* ════════════════════════════════════════════════════════════
