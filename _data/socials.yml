@@ -8,7 +8,7 @@
 
 - name:    "HackTheBox"
   handle:  "robinx0"
-  url:     "https://app.hackthebox.com/users/robinx0"
+  url:     "https://app.hackthebox.com/public/users/285798"
   icon:    htb
   show_in: [op_pills, bio_links, footer]
 
