@@ -260,10 +260,11 @@ function applyWriteupFilter() {
   const filter = window.__activeFilter || 'All';
   const query = (window.__searchQuery || '').toLowerCase().trim();
 
+  const filterLow = filter.toLowerCase();
   let shown = 0;
   writeups.forEach(wu => {
     const cat = wu.dataset.cat || '';
-    const catOk = filter === 'All' || cat === filter;
+    const catOk = filter === 'All' || cat.toLowerCase() === filterLow;
     const text = (wu.dataset.title || '') + ' ' + (wu.dataset.tags || '') + ' ' + cat.toLowerCase();
     const matches = catOk && (!query || text.indexOf(query) !== -1);
     wu.style.display = matches ? '' : 'none';
@@ -297,11 +298,12 @@ function initWriteupFilters() {
     });
   });
 
-  // URL ?cat= support from home chips
+  // URL ?cat= support from home chips (case-insensitive match)
   const params = new URLSearchParams(window.location.search);
   const cat = params.get('cat');
   if (cat) {
-    const btn = Array.from(buttons).find(b => b.dataset.filter === cat);
+    const target = cat.toLowerCase();
+    const btn = Array.from(buttons).find(b => (b.dataset.filter || '').toLowerCase() === target);
     if (btn) btn.click();
   }
 }
