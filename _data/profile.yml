@@ -8,16 +8,16 @@ handle:        "robinx0"
 initials:      "IM"
 
 role:          "Offensive Security Engineer"
-role_short:    "OFFSEC ENGINEER"
+role_short:    "OFFENSIVE SECURITY ENGINEER"
 
 company:       "Shorborno Holdings"
 company_short: "SHORBORNO · GRAMEENPHONE"
 company_full:  "Shorborno Holdings Ltd (Grameenphone Project)"
 
-location:      "Dhaka, BD"
-location_tz:   "Dhaka, BD · UTC+6"
-city:          "dhaka"         # used by footer terminal prompt
-timezone:      6               # UTC offset in hours, used by clock JS
+location:      "DUBAI, UAE"
+location_tz:   "Dubai, UAE · UTC+4"
+city:          "dubai"         # used by footer terminal prompt
+timezone:      4               # UTC offset in hours, used by clock JS
 
 education_short: "B.Sc. CSE · IIUC '23"
 status:          "open to collab"
