@@ -62,6 +62,6 @@ op_rows:
   - { key: "handle",    value: "robinx0",                class: "accent" }
   - { key: "role",      value: "Offensive Security Eng." }
   - { key: "company",   value: "Shorborno · Grameenphone" }
-  - { key: "location",  value: "Dhaka, BD · UTC+6" }
+  - { key: "location",  value: "Dubai, UAE · UTC+4" }
   - { key: "education", value: "B.Sc. CSE · IIUC '23" }
   - { key: "status",    value: "open to collab",         class: "ok" }
