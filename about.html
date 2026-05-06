@@ -1,0 +1,188 @@
+---
+layout: default
+title: About
+nav: about
+prompt_path: "~"
+prompt_cmd: "cat about.md"
+---
+
+{%- assign p = site.data.profile -%}
+{% assign about_posts = site.pages | where_exp: "post", "post.path contains 'blogs/'" | where_exp: "post", "post.name != 'index.md'" %}
+
+<section class="pg-title-wrap">
+  <div class="pg-label">About</div>
+  <h1 class="pg-title">{{ p.hero.name_first | capitalize }} <em>{{ p.hero.name_last | capitalize }}</em></h1>
+  <p class="pg-sub">
+    Offensive security engineer, red teamer, and open-source builder. Based in {{ p.location }}.
+  </p>
+</section>
+
+<!-- BIO -->
+<section class="sec" style="padding-top:12px">
+  <div class="bio-card">
+    <div class="bio-av">
+      {%- if site.profile_photo and site.profile_photo != "" -%}
+        <img src="{{ site.profile_photo | relative_url }}" alt="{{ p.name }}" onerror="this.style.display='none'">
+      {%- endif -%}
+      <span class="bio-av-fb">{{ p.initials }}</span>
+    </div>
+    <div class="bio-main">
+      <div class="bio-name">{{ p.name }}</div>
+      <div class="bio-role">
+        <span>{{ p.role_short }}</span>
+        <span class="sep">//</span>
+        <span>{{ p.company_short }}</span>
+        <span class="sep">//</span>
+        <span>{{ p.location | upcase }}</span>
+      </div>
+      {%- for paragraph in p.bio -%}
+        <p class="bio-text">{{ paragraph }}</p>
+      {%- endfor -%}
+      {% include bio-links.html %}
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="sec">
+  <div class="sec-hdr"><div class="label">At a glance</div></div>
+  {% include stats-strip.html context="about" writeups_count=about_posts.size %}
+</section>
+
+<!-- EXPERIENCE -->
+<section class="sec">
+  <div class="sec-hdr">
+    <div>
+      <div class="label">Experience</div>
+      <div class="sec-sub">Role history, reverse chronological</div>
+    </div>
+  </div>
+  {% for entry in site.data.experience %}
+    {% include tl-card.html entry=entry %}
+  {% endfor %}
+</section>
+
+<!-- EDUCATION -->
+<section class="sec">
+  <div class="sec-hdr"><div class="label">Education</div></div>
+  {% for entry in site.data.education %}
+    {% include tl-card.html entry=entry %}
+  {% endfor %}
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="sec">
+  <div class="sec-hdr">
+    <div>
+      <div class="label">Certifications</div>
+      <div class="sec-sub">Click any credential for details &amp; personal review</div>
+    </div>
+  </div>
+  <div class="certs-grid">
+    {% for cert in site.data.certifications %}
+      {% include cert-card.html cert=cert %}
+    {% endfor %}
+  </div>
+</section>
+
+<!-- PRO LABS -->
+<section class="sec">
+  <div class="sec-hdr">
+    <div>
+      <div class="label">HackTheBox Pro Labs</div>
+      <div class="sec-sub">Advanced enterprise-network simulations</div>
+    </div>
+  </div>
+  <div class="certs-grid">
+    {% for lab in site.data.pro_labs %}
+      {% include cert-card.html cert=lab variant="green" %}
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section class="sec">
+  <div class="sec-hdr">
+    <div>
+      <div class="label">Achievements &amp; awards</div>
+      <div class="sec-sub">Competitive CTF placements and platform milestones</div>
+    </div>
+  </div>
+  <div class="ach-grid">
+    {%- for a in site.data.achievements -%}
+      <div class="ach{% if a.color and a.color != 'red' %} {{ a.color }}{% endif %}">
+        <div class="ach-rank"{% if a.rank_font_size %} style="font-size:{{ a.rank_font_size }};padding-top:6px"{% endif %}>{{ a.rank }}</div>
+        <div class="ach-title">{{ a.title }}</div>
+        <div class="ach-meta">{{ a.meta }}</div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="sec">
+  <div class="sec-hdr">
+    <div>
+      <div class="label">Publications</div>
+      <div class="sec-sub">Peer-reviewed research</div>
+    </div>
+  </div>
+  {%- for pub in site.data.publications -%}
+    {%- assign authors_html = pub.authors | replace: "{me}", '<span class="me">' | append: "" -%}
+    {%- comment %}Replace {me} markers with the red-highlight span{% endcomment -%}
+    {%- assign author_rendered = pub.authors | replace: "{me}", '<span class="me">' | append: p.name | append: '</span>' -%}
+    {%- comment %}Actually simpler: split on {me}, wrap the name{% endcomment -%}
+    {%- assign parts = pub.authors | split: "{me}" -%}
+    <div class="pub">
+      <div class="pub-id">{{ pub.id }}</div>
+      <div class="pub-title">{{ pub.title }}</div>
+      <div class="pub-authors">
+        {%- for part in parts -%}
+          {{ part }}{%- unless forloop.last -%}<span class="me">{{ p.name }}</span>{%- endunless -%}
+        {%- endfor -%}
+      </div>
+      <div class="pub-venue">{{ pub.venue }}</div>
+    </div>
+  {%- endfor -%}
+</section>
+
+<!-- COMMUNITY -->
+<section class="sec">
+  <div class="sec-hdr">
+    <div>
+      <div class="label">Community</div>
+      <div class="sec-sub">Mentorship and public education</div>
+    </div>
+  </div>
+  {%- for c in site.data.community -%}
+    <div class="comm-card">
+      <div class="comm-title">{{ c.title }}</div>
+      <div class="comm-meta">{{ c.meta }}</div>
+      <p class="comm-body">{{ c.body }}</p>
+    </div>
+  {%- endfor -%}
+</section>
+
+<!-- SKILLS -->
+<section class="sec">
+  <div class="sec-hdr">
+    <div>
+      <div class="label">Technical skills</div>
+      <div class="sec-sub">Domains, tools, and languages</div>
+    </div>
+  </div>
+  <div class="skill-grid">
+    {%- for group in site.data.skills -%}
+      <div class="skill-cat">
+        <h4>{{ group.heading }}</h4>
+        <div class="skill-tags">
+          {%- for tag in group.items -%}
+            <span class="skill-tag">{{ tag }}</span>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% include cert-modals.html %}

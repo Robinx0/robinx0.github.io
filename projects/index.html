@@ -1,0 +1,83 @@
+---
+layout: default
+title: Projects
+nav: projects
+prompt_path: "~/projects"
+prompt_cmd: "make release"
+description: "Tools, research, and offensive security side-projects."
+---
+
+{%- comment -%}
+  Renders the /projects/ page entirely from data in project-list.md.
+  Add a new project there and it appears here automatically - no edits
+  to this file required.
+{%- endcomment -%}
+
+{% assign data = site.pages | where: "path", "projects/project-list.md" | first %}
+{% assign featured_projects = data.projects | where: "featured", true %}
+{% assign other_projects    = data.projects | where_exp: "p", "p.featured != true" %}
+
+<section class="pg-title-wrap">
+  <div class="pg-label">Projects</div>
+  <h1 class="pg-title">Tools <em>&amp;</em> releases<span class="pg-count">{{ data.projects | size }}</span></h1>
+  <p class="pg-sub">
+    {{ page.description }} All work here is designed for authorized engagement,
+    research, or lab exercise use.
+  </p>
+</section>
+
+{% if featured_projects.size > 0 %}
+<section class="sec" style="padding-top:12px">
+  <div class="sec-hdr">
+    <div>
+      <div class="label">Shipping this year</div>
+      <div class="sec-sub">Public open-source releases in development</div>
+    </div>
+  </div>
+  <div class="tools-grid">
+    {% for project in featured_projects %}
+      {% include project-card.html project=project %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if other_projects.size > 0 %}
+<section class="sec">
+  <div class="sec-hdr">
+    <div>
+      <div class="label">Research &amp; archive</div>
+      <div class="sec-sub">Alpha previews, private research, and retired projects</div>
+    </div>
+  </div>
+  <div class="tools-grid">
+    {% for project in other_projects %}
+      {% include project-card.html project=project %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="sec">
+  <div class="sec-hdr"><div class="label">Status legend</div></div>
+  <div class="cat-chips" style="margin-top:4px">
+    <span class="chip" style="border-color:rgba(16,185,129,.3)">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--ok)"></span>
+      RELEASE <span class="chip-count" style="background:rgba(16,185,129,.1);color:var(--ok)">ok</span>
+    </span>
+    <span class="chip" style="border-color:rgba(245,158,11,.3)">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--wip)"></span>
+      UPCOMING <span class="chip-count" style="background:rgba(245,158,11,.1);color:var(--wip)">wip</span>
+    </span>
+    <span class="chip" style="border-color:rgba(168,85,247,.3)">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--alpha)"></span>
+      ALPHA <span class="chip-count" style="background:rgba(168,85,247,.1);color:var(--alpha)">alpha</span>
+    </span>
+    <span class="chip">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--t3)"></span>
+      RESEARCH <span class="chip-count" style="background:rgba(255,255,255,.04);color:var(--t3)">priv</span>
+    </span>
+  </div>
+</section>
+
+{% include project-modal.html %}

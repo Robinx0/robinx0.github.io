@@ -1,0 +1,167 @@
+---
+layout: default
+title: Home
+nav: home
+prompt_path: "~"
+prompt_cmd: "whoami"
+---
+
+{%- assign p = site.data.profile -%}
+{%- assign hero = p.hero -%}
+
+{% assign all_posts = site.pages | where_exp: "post", "post.path contains 'blogs/'" | where_exp: "post", "post.name != 'index.md'" | sort: "date" | reverse %}
+{% assign categories = "" | split: "" %}
+{% for post in all_posts %}
+  {% assign parts = post.path | split: "/" %}
+  {% if parts.size >= 3 %}
+    {% assign cat = parts[1] %}
+    {% unless categories contains cat %}{% assign categories = categories | push: cat %}{% endunless %}
+  {% endif %}
+{% endfor %}
+
+{% assign projects_page = site.pages | where: "path", "projects/project-list.md" | first %}
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bgtext">{{ p.handle | upcase }}</div>
+
+  <div class="hero-grid">
+
+    <div>
+      <span class="h-tag">{{ hero.tag }}</span>
+
+      <h1 class="h-name">
+        <span class="n-row">
+          {%- assign name_first_chars = hero.name_first | split: "" -%}
+          {%- for ch in name_first_chars -%}<span class="ch" style="--d:{{ forloop.index0 }}">{{ ch }}</span>{%- endfor -%}
+        </span>
+        <span class="n-row">
+          <span class="n-accent">
+            {%- assign name_last_chars = hero.name_last | split: "" -%}
+            {%- for ch in name_last_chars -%}
+              {%- assign d = forloop.index0 | plus: name_first_chars.size | plus: 1 -%}
+              <span class="ch" style="--d:{{ d }}">{{ ch }}</span>
+            {%- endfor -%}
+          </span><em class="dot-pulse">.</em>
+        </span>
+      </h1>
+
+      <div class="h-subline">
+        <span>{{ p.role_short }}</span>
+        <span class="sep">//</span>
+        <span class="hl">{{ p.company | upcase }}</span>
+        <span class="sep">//</span>
+        <span>{{ p.location | upcase }}</span>
+      </div>
+
+      <p class="h-desc">{{ hero.description }}</p>
+
+      <div class="h-btns">
+        <a href="{{ '/writeups' | relative_url }}" class="btn-p">Read writeups</a>
+        <a href="{{ '/about' | relative_url }}" class="btn-g">About <span>↗</span></a>
+      </div>
+    </div>
+
+    <div class="brackets-4 op-wrap" id="opCard">
+      <span class="br-tl"></span><span class="br-tr"></span>
+      <span class="br-bl"></span><span class="br-br"></span>
+
+      <div class="op-flipper">
+        <!-- FRONT: operator info -->
+        <div class="op-face op-card">
+          <div class="op-head">
+            <span>OPERATOR-PROFILE.ini</span>
+            <span class="op-head-dots"><span></span><span></span><span></span></span>
+          </div>
+          {%- for row in p.op_rows -%}
+            <div class="op-row">
+              <span class="op-k">{{ row.key }}</span>
+              <span class="op-v {{ row.class }}">{{ row.value }}</span>
+            </div>
+          {%- endfor -%}
+
+          {% include op-pills.html %}
+
+          <div class="op-flip-hint">
+            <span class="fh-icon">◐</span>
+            <span>CLICK CARD TO VIEW PHOTO</span>
+          </div>
+        </div>
+
+        <!-- BACK: profile photo with initials-placeholder fallback -->
+        <div class="op-face op-back">
+          {%- if site.profile_photo and site.profile_photo != "" -%}
+            <img src="{{ site.profile_photo | relative_url }}" alt="{{ p.name }}" class="op-back-img" onerror="this.style.display='none'">
+          {%- endif -%}
+          <span class="op-back-fb">{{ p.initials }}</span>
+          <div class="op-back-overlay">
+            <div class="op-back-handle">{{ p.handle | upcase }}</div>
+            <div class="op-back-hint">CLICK TO FLIP BACK ↻</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  {% include stats-strip.html context="home" %}
+</section>
+
+<!-- FEATURED PROJECTS -->
+{% if projects_page.projects %}
+{% assign featured_projects = projects_page.projects | where: "featured", true %}
+{% if featured_projects.size > 0 %}
+<section class="sec">
+  <div class="sec-hdr">
+    <div>
+      <div class="label">Featured projects</div>
+      <div class="sec-sub">Open-source releases &amp; research I'm shipping</div>
+    </div>
+    <a href="{{ '/projects' | relative_url }}" class="more">All projects →</a>
+  </div>
+  <div class="tools-grid">
+    {% for project in featured_projects limit: 2 %}
+      {% include project-card.html project=project %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endif %}
+
+<!-- RECENT WRITEUPS -->
+<section class="sec">
+  <div class="sec-hdr">
+    <div>
+      <div class="label">Recent writeups</div>
+      <div class="sec-sub">Technique &amp; methodology walkthroughs</div>
+    </div>
+    <a href="{{ '/writeups' | relative_url }}" class="more">View all →</a>
+  </div>
+
+  <div class="wu-list">
+    {% for post in all_posts limit: 6 %}
+      {% include wu-row.html post=post index=forloop.index %}
+    {% endfor %}
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="sec">
+  <div class="sec-hdr"><div class="label">Browse by category</div></div>
+  <div class="cat-chips">
+    {% for cat in categories %}
+      {% assign cat_display = cat | replace: "-", " " | upcase %}
+      {% assign cat_posts = all_posts | where_exp: "post", "post.path contains cat" %}
+      {% capture chip_class %}{% include wu-cat-class.html slug=cat %}{% endcapture %}
+      <a href="{{ '/writeups' | relative_url }}?cat={{ cat_display | capitalize | url_encode }}"
+         class="chip {{ chip_class | strip }}"
+         data-cat-slug="{{ cat }}">
+        {{ cat_display }}
+        <span class="chip-count" data-total="{{ cat_posts.size }}">{{ cat_posts.size }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% include cert-modals.html %}
+{% include project-modal.html %}

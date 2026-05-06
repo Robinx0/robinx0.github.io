@@ -1,0 +1,38 @@
+# ─────────────────────────────────────────────────────────────
+# STATS STRIP - 6 cells, used on home hero and about "At a glance".
+#
+# Each entry supports:
+#   value:      "70"                  (the big number)
+#   suffix:     "+"                   (rendered in red after the value)
+#   sub:        "...text in red..."       (secondary small text inside the value, e.g. "·#2")
+#   label:      "Machines pwned"      (small uppercase caption)
+#   sub_label:  "CRTO · CPTS ..."     (tiny dim text under the label - multi-line OK)
+#   dynamic:    writeups_count        (template replaces value with a computed number)
+#   show_on:    [home, about]         (which pages render this cell; default both)
+# ─────────────────────────────────────────────────────────────
+
+- value:  "75"
+  suffix: "+"
+  label:  "Machines pwned"
+
+- dynamic:  writeups_count
+  label:    "Writeups published"
+  show_on:  [about]   # home doesn't show this one
+
+- value:     "05"
+  label:     "Certifications"
+  sub_label: "CRTO · CPTS · eWPTX<br>eCPPT · eJPT"
+
+- value:     "04"
+  label:     "HTB pro labs"
+  sub_label: "APT · Dante · Rasta · Asc."
+
+- value:  "#1"
+  sub:    "·#2"
+  label:  "CyberDrill ntl."
+
+- value:  "#31"
+  label:  "BlackHat MEA '23"
+
+- value:  "02"
+  label:  "Publications"

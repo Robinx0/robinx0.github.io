@@ -1,0 +1,14 @@
+{%- comment -%}
+  Renders the bio-links row (about page bio card).
+  Pulls from _data/socials.yml, filtered by `show_in` flag.
+{%- endcomment -%}
+
+<div class="bio-links">
+  {%- for social in site.data.socials -%}
+    {%- if social.show_in contains "bio_links" -%}
+      <a href="{{ social.url }}" class="bio-link"{% unless social.icon == "email" %} target="_blank" rel="noopener"{% endunless %}>
+        {{ social.name | upcase }} ↗
+      </a>
+    {%- endif -%}
+  {%- endfor -%}
+</div>

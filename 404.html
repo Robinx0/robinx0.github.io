@@ -1,0 +1,41 @@
+---
+layout: default
+title: "404"
+nav: ""
+permalink: /404.html
+prompt_path: "~"
+prompt_cmd: "cat /var/log/404.log"
+---
+
+{% assign blog_pages = site.pages | where_exp: "p", "p.path contains 'blogs/'" | where_exp: "p", "p.name != 'index.md'" %}
+{% assign categories = "" | split: "" %}
+{% for p in blog_pages %}
+  {% assign parts = p.path | split: "/" %}
+  {% if parts.size >= 3 %}
+    {% assign cat = parts[1] %}
+    {% unless categories contains cat %}{% assign categories = categories | push: cat %}{% endunless %}
+  {% endif %}
+{% endfor %}
+
+<section class="nf-wrap">
+  <div class="nf-code">
+    4<span style="color:var(--red)">0</span>4
+  </div>
+  <p class="nf-msg">SEGMENTATION FAULT · PAGE NOT FOUND</p>
+
+  <div class="nf-actions">
+    <a href="{{ '/' | relative_url }}" class="btn-p">Return to base</a>
+    <a href="{{ '/writeups' | relative_url }}" class="btn-g">Browse writeups ↗</a>
+  </div>
+
+  <div class="nf-cats">
+    <div class="label" style="margin-bottom:12px;justify-content:center">Try a category</div>
+    <div class="cat-chips" style="justify-content:center">
+      {% for cat in categories %}
+        {% assign cat_display = cat | replace: "-", " " | upcase %}
+        {% capture chip_class %}{% include wu-cat-class.html slug=cat %}{% endcapture %}
+        <a href="{{ '/writeups' | relative_url }}?cat={{ cat_display | capitalize | url_encode }}" class="chip {{ chip_class | strip }}">{{ cat_display }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

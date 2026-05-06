@@ -1,0 +1,67 @@
+# ─────────────────────────────────────────────────────────────
+# PROFILE - shared by home, about, and footer.
+# Everything the site says about who you are lives here.
+# ─────────────────────────────────────────────────────────────
+
+name:          "Irfanul Montasir"
+handle:        "robinx0"
+initials:      "IM"
+
+role:          "Offensive Security Engineer"
+role_short:    "OFFSEC ENGINEER"
+
+company:       "Shorborno Holdings"
+company_short: "SHORBORNO · GRAMEENPHONE"
+company_full:  "Shorborno Holdings Ltd (Grameenphone Project)"
+
+location:      "Dhaka, BD"
+location_tz:   "Dhaka, BD · UTC+6"
+city:          "dhaka"         # used by footer terminal prompt
+timezone:      6               # UTC offset in hours, used by clock JS
+
+education_short: "B.Sc. CSE · IIUC '23"
+status:          "open to collab"
+email:           "irfanmrobin@gmail.com"
+
+# ─── hero section (home page) ───
+hero:
+  tag:          "OFFENSIVE SECURITY · RED TEAM"
+  name_first:   "IRFANUL"
+  name_last:    "MONTASIR"
+  description: >
+    I work in offensive security - <span class="red-hl">penetration testing</span>,
+    Active Directory exploitation, <strong>EDR bypass &amp; AV evasion</strong>,
+    source-code review, and building open-source offensive tooling for authorized
+    engagements at Bangladesh's largest telco.
+
+# ─── about-page bio paragraphs ───
+bio:
+  - >
+    I work on the red team at <strong>Shorborno Holdings Ltd</strong> on the
+    <strong>Grameenphone</strong> project - Bangladesh's largest telco - focusing on
+    penetration testing, Active Directory exploitation, EDR bypass, and custom tooling
+    in C/C++ and Python. My day-to-day centers on simulating adversaries, stress-testing
+    SOC detection, and running purple-team exercises.
+  - >
+    Before Shorborno I was a <strong>Security Researcher at PentesterSpace</strong>,
+    where I worked across mobile, network, and AD pentesting with BloodHound,
+    CrackMapExec, MobSF, and Burp Suite Pro. I've also spent time in non-security IT
+    leadership - building full-stack systems and leading operations - which shaped how
+    I think about defensive posture from the other side.
+  - >
+    Outside work I compete in CTFs, contribute to open-source security tooling, mentor
+    students through the <strong>IIUC InfoSec Community</strong> I founded, and write
+    about technique and methodology. My research interests span application &amp; AI
+    security, IoT and automotive hacking, ML for threat detection, and agentic AI
+    applied to offensive security.
+
+# ─── operator card rows (home hero, front face) ───
+# `class` is optional: "accent" → red, "ok" → green dot
+op_rows:
+  - { key: "name",      value: "Irfanul Montasir" }
+  - { key: "handle",    value: "robinx0",                class: "accent" }
+  - { key: "role",      value: "Offensive Security Eng." }
+  - { key: "company",   value: "Shorborno · Grameenphone" }
+  - { key: "location",  value: "Dhaka, BD · UTC+6" }
+  - { key: "education", value: "B.Sc. CSE · IIUC '23" }
+  - { key: "status",    value: "open to collab",         class: "ok" }

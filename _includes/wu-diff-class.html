@@ -1,0 +1,12 @@
+{%- comment -%}
+  Maps a difficulty label to the short CSS class used on .wu-diff.
+  Usage: {% capture wu_diff_class %}{% include wu-diff-class.html level=page.difficulty %}{% endcapture %}
+{%- endcomment -%}
+{%- case include.level -%}
+{%- when 'Easy' -%}easy
+{%- when 'Medium' -%}med
+{%- when 'Hard' -%}hard
+{%- when 'Elite' -%}insane
+{%- when 'Insane' -%}insane
+{%- else -%}med
+{%- endcase -%}

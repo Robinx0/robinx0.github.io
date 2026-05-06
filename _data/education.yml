@@ -1,0 +1,10 @@
+# ─────────────────────────────────────────────────────────────
+# EDUCATION - rendered with the same timeline (tl) card as experience.
+# ─────────────────────────────────────────────────────────────
+
+- date:    "Nov 2018 - Dec 2023"
+  role:    "B.Sc. in Computer Science & Engineering"
+  org:     "International Islamic University Chittagong (IIUC) · Chattogram, BD · GPA 3.20 / 4.00"
+  color:   amber
+  bullets:
+    - "<strong>Thesis:</strong> <em>A Novel Approach for Context-Based Searching from Al-Quran using BERTopic Model.</em>"

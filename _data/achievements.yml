@@ -1,0 +1,30 @@
+# ─────────────────────────────────────────────────────────────
+# ACHIEVEMENTS - CTF placements, platform milestones.
+#
+# color: red (default) | amber | alpha | blue - tints the rank number + top border.
+# rank_font_size: optional override for long ranks (e.g. "70+ · 70+ · 5F").
+# ─────────────────────────────────────────────────────────────
+
+- rank:  "#1"
+  title: "National CyberDrill CTF 2020"
+  meta:  "Champion · BGD e-GOV CIRT"
+
+- rank:  "#2"
+  title: "National CyberDrill CTF 2021"
+  meta:  "Runner-up · BGD e-GOV CIRT"
+  color: amber
+
+- rank:  "#2"
+  title: "CTF: Super League 2021"
+  meta:  "Runner-up · IEEE CS BUET"
+  color: alpha
+
+- rank:  "#31"
+  title: "BlackHat MEA 2023"
+  meta:  "Top 31 of 250+ · Tahaluf & SAFCSP"
+  color: blue
+
+- rank:           "70+ · 70+ · 5F"
+  rank_font_size: "20px"
+  title:          "HackTheBox - robinx0"
+  meta:           "Machines · Challenges · Fortresses"

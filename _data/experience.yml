@@ -1,0 +1,34 @@
+# ─────────────────────────────────────────────────────────────
+# EXPERIENCE - reverse chronological.
+#
+# color: red (default) | blue | green | amber - drives the left-border tint.
+# bullets: rendered as a ul with red › markers.
+# ─────────────────────────────────────────────────────────────
+
+- date:    "May 2025 - Present"
+  role:    "Offensive Security Engineer"
+  org:     "Shorborno Holdings Ltd (Grameenphone Project) · Dhaka, BD"
+  color:   red
+  bullets:
+    - "Conduct penetration testing across mobile, network, and Active Directory environments."
+    - "Build custom APT emulation tools in C/C++ and Python - reflective loaders, indirect-syscall stagers, in-memory execution primitives."
+    - "Bypass industry-leading EDR/XDR via API hook removal, ETW/AMSI patching, and module stomping to stress-test SOC detection."
+    - "Perform source-code review and reverse engineering on production applications; run OSINT-driven threat enumeration."
+    - "Collaborate in purple-team exercises; design pentesting dashboards mapping findings to MITRE ATT&CK and NIST."
+
+- date:    "Apr 2024 - Apr 2025"
+  role:    "Information Technology Manager"
+  org:     "Morshed Alam Foodstuff Trading LLC · Al Aweer, Dubai"
+  color:   blue
+  bullets:
+    - "Developed a full-stack inventory system with real-time stock tracking and automated invoicing."
+    - "Led operations and technical strategy to secure and scale financial processes for high-value transactions."
+
+- date:    "Mar 2022 - Jan 2024"
+  role:    "Security Researcher"
+  org:     "PentesterSpace · Dhaka, BD"
+  color:   green
+  bullets:
+    - "Performed pentesting across mobile, network, and AD environments using BloodHound, CrackMapExec, MobSF, Burp Suite Pro, and Nmap."
+    - "Deployed IDS/IPS and SIEM tools (Suricata, Wazuh, Splunk, Snort) for proactive threat detection."
+    - "Conducted compliance-driven assessments aligned with GDPR, ISO/IEC 27001, and NIST with detailed technical reporting."

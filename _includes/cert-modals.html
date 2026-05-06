@@ -1,0 +1,18 @@
+{%- comment -%}
+  Single shared modal for all certs and pro labs. Populated dynamically by
+  initModal() in main.js from the clicked card's data attributes. Image
+  source is built as {data-img-base}/{id}.png - drop the PNG in
+  /assets/img/certs/ named after the cert id and it just shows up.
+{%- endcomment -%}
+
+<div class="modal-overlay hidden" id="cert-modal"
+     role="dialog" aria-modal="true" aria-labelledby="cert-modal-title"
+     data-img-base="{{ '/assets/img/certs/' | relative_url }}">
+  <div class="modal-box">
+    <button class="modal-close" type="button" aria-label="Close">×</button>
+    <div class="modal-img"><img id="cert-modal-img" src="" alt=""></div>
+    <div class="modal-badge mono" id="cert-modal-badge"></div>
+    <div class="modal-title" id="cert-modal-title"></div>
+    <div class="modal-org mono" id="cert-modal-org"></div>
+  </div>
+</div>

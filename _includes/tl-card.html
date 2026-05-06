@@ -1,0 +1,23 @@
+{%- comment -%}
+  Renders one timeline card (experience / education).
+  Usage: {% include tl-card.html entry=e %}
+  entry fields: date, role, org, color (red|blue|green|amber), bullets: [string]
+{%- endcomment -%}
+
+{%- assign e = include.entry -%}
+{%- assign color = e.color -%}
+
+<div class="tl{% if color and color != 'red' %} {{ color }}{% endif %}">
+  <div class="tl-date">{{ e.date }}</div>
+  <div>
+    <div class="tl-role">{{ e.role }}</div>
+    <div class="tl-org">{{ e.org }}</div>
+    {%- if e.bullets and e.bullets.size > 0 -%}
+      <div class="tl-body">
+        <ul>
+          {%- for b in e.bullets -%}<li>{{ b }}</li>{%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title and page.title != "Home" %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description | strip_html | truncatewords: 50 }}">
+  {% seo %}
+  {% feed_meta %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inconsolata:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Namdhinggo:wght@400;500;600;700;800&family=Nova+Mono&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+
+  <nav class="nav">
+    <a href="{{ '/'         | relative_url }}" class="nav-item {% if page.nav == 'home'     %}on{% endif %}">Home</a>
+    <a href="{{ '/writeups' | relative_url }}" class="nav-item {% if page.nav == 'writeups' %}on{% endif %}">Writeups</a>
+    <a href="{{ '/projects' | relative_url }}" class="nav-item {% if page.nav == 'projects' %}on{% endif %}">Projects</a>
+    <a href="{{ '/about'    | relative_url }}" class="nav-item {% if page.nav == 'about'    %}on{% endif %}">About</a>
+  </nav>
+
+  <main class="scroll">
+    <div class="pg">
+      {{ content }}
+    </div>
+
+    {% include footer.html prompt_path=page.prompt_path prompt_cmd=page.prompt_cmd %}
+  </main>
+
+  {% if page.nav == 'home' or page.nav == 'writeups' %}
+  {% assign manifest_posts = site.pages | where_exp: "p", "p.path contains 'blogs/'" | where_exp: "p", "p.name != 'index.md'" %}
+  <script id="post-manifest" type="application/json">
+[{% for p in manifest_posts %}{% assign mparts = p.path | split: "/" %}{"url":"{{ p.url | relative_url }}","cat":"{{ mparts[1] }}"}{% unless forloop.last %},{% endunless %}{% endfor %}]
+  </script>
+  {% endif %}
+
+  <!-- Image lightbox -->
+  <div class="lightbox-overlay" id="lightbox" hidden>
+    <button class="lightbox-close" type="button" aria-label="Close lightbox">×</button>
+    <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous image" hidden>‹</button>
+    <button class="lightbox-nav lightbox-next" type="button" aria-label="Next image" hidden>›</button>
+    <img class="lightbox-img" id="lightbox-img" alt="">
+    <div class="lightbox-caption mono" id="lightbox-caption" hidden></div>
+  </div>
+
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>

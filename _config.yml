@@ -1,0 +1,52 @@
+# ─────────────────────────────────────────────────────────────
+# Site-level Jekyll config. Personal identity + social links live
+# in _data/profile.yml and _data/socials.yml respectively.
+# ─────────────────────────────────────────────────────────────
+
+title:       "ROBINX0"
+description: "Offensive Security Research · Red Team Ops · Writeups"
+tagline:     "Breaking things. Documenting everything."
+author:      "Irfanul Montasir"   # used by jekyll-seo-tag metadata
+
+url:         ""
+baseurl:     ""
+
+# Profile photo - drop a JPG/PNG at this path (e.g. /assets/img/profile.jpg)
+# then set it here. While empty, the "IM" text fallback is shown.
+profile_photo: ""
+
+markdown:    kramdown
+highlighter: rouge
+permalink:   pretty
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+  - NotPartOfSiteJustForRef   # reference site - excluded from the Jekyll build
+  - node_modules
+  - vendor
+
+include:
+  - blogs
+  - projects
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-sitemap
+
+feed:
+  path: feed.xml
+
+defaults:
+  - scope:
+      path: "blogs"
+      type: "pages"
+    values:
+      layout: "post"

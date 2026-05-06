@@ -1,0 +1,42 @@
+{%- comment -%}
+  Project preview modal. Populated dynamically by initProjectModal()
+  in main.js from the clicked card's data attributes. Image source is
+  built as {data-img-base}/{id}.png — drop the PNG in
+  /assets/img/projects/ named after the project id and it just shows up.
+  Missing screenshots gracefully fall back to a "NO PREVIEW" tag.
+{%- endcomment -%}
+
+<div class="modal-overlay project-modal hidden" id="project-modal"
+     role="dialog" aria-modal="true" aria-labelledby="project-modal-title"
+     data-img-base="{{ '/assets/img/projects/' | relative_url }}">
+  <div class="modal-box modal-box-wide">
+    <button class="modal-close" type="button" aria-label="Close">×</button>
+
+    <div class="modal-img modal-img-screenshot">
+      <img id="project-modal-img" src="" alt="">
+      <div class="modal-img-fb mono" id="project-modal-fb" hidden>NO PREVIEW AVAILABLE</div>
+    </div>
+
+    <div class="modal-badge mono" id="project-modal-badge"></div>
+    <div class="modal-title" id="project-modal-title"></div>
+    <div class="modal-org mono" id="project-modal-org"></div>
+
+    <p class="modal-desc" id="project-modal-desc"></p>
+
+    <div class="modal-sec" id="project-modal-stack-sec" hidden>
+      <div class="modal-lab">Stack</div>
+      <div class="tool-stack" id="project-modal-stack"></div>
+    </div>
+
+    <div class="modal-sec" id="project-modal-tags-sec" hidden>
+      <div class="modal-lab">Tags</div>
+      <div class="tool-tags" id="project-modal-tags"></div>
+    </div>
+
+    <div class="modal-actions" id="project-modal-actions">
+      <a class="btn-p" id="project-modal-github" href="#" target="_blank" rel="noopener" hidden>View on GitHub</a>
+      <a class="btn-g" id="project-modal-demo"   href="#" target="_blank" rel="noopener" hidden>Live demo</a>
+      <a class="btn-g" id="project-modal-paper"  href="#" target="_blank" rel="noopener" hidden>Paper</a>
+    </div>
+  </div>
+</div>

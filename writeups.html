@@ -1,0 +1,59 @@
+---
+layout: default
+title: Writeups
+nav: writeups
+prompt_path: "~/writeups"
+prompt_cmd: "ls -la"
+---
+
+{% assign all_posts = site.pages | where_exp: "p", "p.path contains 'blogs/'" | where_exp: "p", "p.name != 'index.md'" | sort: "date" | reverse %}
+{% assign categories = "" | split: "" %}
+{% for p in all_posts %}
+  {% assign parts = p.path | split: "/" %}
+  {% if parts.size >= 3 %}
+    {% assign cat = parts[1] %}
+    {% unless categories contains cat %}{% assign categories = categories | push: cat %}{% endunless %}
+  {% endif %}
+{% endfor %}
+
+<section class="pg-title-wrap">
+  <div class="pg-label">Archive</div>
+  <h1 class="pg-title">Writeups <em>&amp;</em> research<span class="pg-count filter-count">{{ all_posts.size }}</span></h1>
+  <p class="pg-sub">
+    Technique and methodology walkthroughs from HackTheBox, CRTO, CTFs, and research labs.
+    Filter by domain, search by keyword, or browse the latest below.
+  </p>
+</section>
+
+<section class="sec" style="padding-top:8px">
+  <div class="search-wrap">
+    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="wr-search" type="search" class="search-input" placeholder="SEARCH BY TITLE, TAG, OR CATEGORY..." autocomplete="off" aria-label="Search writeups">
+    <kbd class="search-kbd">/</kbd>
+  </div>
+
+  <div class="filters">
+    <button class="fb on" data-filter="All">ALL</button>
+    {% for cat in categories %}
+      {% assign cat_display = cat | replace: "-", " " | upcase %}
+      <button class="fb" data-filter="{{ cat_display | capitalize }}">{{ cat_display }}</button>
+    {% endfor %}
+  </div>
+
+  <div class="filter-meta">
+    Showing <span class="count" id="visible-count">{{ all_posts.size }}</span> of
+    <span class="count">{{ all_posts.size }}</span> writeups
+  </div>
+
+  <div class="wu-list" id="wr-list">
+    {% for post in all_posts %}
+      {% include wu-row.html post=post index=forloop.index %}
+    {% endfor %}
+  </div>
+
+  <div id="wr-empty" class="wu-empty" hidden>
+    No writeups match your search.
+  </div>
+</section>
+
+{% include cert-modals.html %}

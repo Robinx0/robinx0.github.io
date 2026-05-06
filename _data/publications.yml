@@ -1,0 +1,14 @@
+# ─────────────────────────────────────────────────────────────
+# PUBLICATIONS - peer-reviewed papers.
+# Wrap your own name in {me} so it renders in red on the page.
+# ─────────────────────────────────────────────────────────────
+
+- id:      "A1"
+  title:   "Risk-Based MITRE TTP Scoring for Proactive Cyber Threat Prioritization and Response"
+  authors: "S. M. Zia Ur Rashid, M. M. Alam, {me}, A. Haq"
+  venue:   "14th International Conference on Software and Computer Applications (ICSCA 2025) · Kuala Lumpur, Malaysia"
+
+- id:      "A2"
+  title:   "Securing Agentic AI: Threats, Risks, and Mitigation"
+  authors: "S. M. Zia Ur Rashid, {me}, A. Haq, M. M. Alam, M. T. Ahmmed"
+  venue:   "International Conference on Advancement in Cyber Security and Digital Forensics (ICACSDF 2025) · UPES, Dehradun, India"

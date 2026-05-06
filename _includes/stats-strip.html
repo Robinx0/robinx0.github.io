@@ -1,0 +1,38 @@
+{%- comment -%}
+  Renders the stats strip from _data/stats.yml. Column count auto-adapts to
+  the number of visible cells (so adding/removing a stat doesn't orphan a row).
+  Usage: {% include stats-strip.html context="home" %}
+  Pages that need the dynamic Writeups count should pass it:
+    {% include stats-strip.html context="about" writeups_count=56 %}
+{%- endcomment -%}
+
+{%- assign ctx = include.context | default: "home" -%}
+
+{%- assign visible_count = 0 -%}
+{%- for stat in site.data.stats -%}
+  {%- assign where = stat.show_on -%}
+  {%- if where == nil or where contains ctx -%}
+    {%- assign visible_count = visible_count | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
+
+<div class="strip" style="--cols: {{ visible_count }}">
+  {%- for stat in site.data.stats -%}
+    {%- assign where = stat.show_on -%}
+    {%- if where == nil or where contains ctx -%}
+
+      {%- assign value = stat.value -%}
+      {%- if stat.dynamic == "writeups_count" and include.writeups_count -%}
+        {%- assign value = include.writeups_count -%}
+      {%- endif -%}
+
+      <div class="strip-c">
+        <div class="strip-v">
+          {{ value }}{% if stat.suffix %}<span class="suffix">{{ stat.suffix }}</span>{% endif %}{% if stat.sub %}<span class="sub-placements">{{ stat.sub }}</span>{% endif %}
+        </div>
+        <div class="strip-l">{{ stat.label }}</div>
+        {%- if stat.sub_label -%}<div class="strip-certs">{{ stat.sub_label }}</div>{%- endif -%}
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+</div>

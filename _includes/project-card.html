@@ -1,0 +1,85 @@
+{%- comment -%}
+  Renders a project as a .tool card (matches the reference design).
+  Usage: {% include project-card.html project=p %}
+
+  Only `name` and `description` are required. Every other field is optional.
+  Status classes: ok | wip | alpha | priv — handled purely in CSS.
+
+  Click behaviour: opens a project preview modal populated from the data-*
+  attributes below. The modal is rendered once per page via
+  {% include project-modal.html %} and is wired up in main.js.
+{%- endcomment -%}
+
+{%- assign p = include.project -%}
+{%- assign status = p.status | default: "ok" -%}
+{%- assign status_label = status | upcase -%}
+{%- case status -%}
+  {%- when "ok"    -%}{%- assign status_label = "RELEASE" -%}
+  {%- when "wip"   -%}{%- assign status_label = "UPCOMING" -%}
+  {%- when "alpha" -%}{%- assign status_label = "ALPHA" -%}
+  {%- when "priv"  -%}{%- assign status_label = "RESEARCH" -%}
+{%- endcase -%}
+
+{%- assign proj_slug = p.id | default: p.name | slugify -%}
+
+<div class="tool" role="button" tabindex="0"
+     id="proj-{{ proj_slug }}"
+     data-proj="{{ proj_slug }}"
+     data-proj-name="{{ p.name | escape }}"
+     data-proj-status="{{ status }}"
+     data-proj-status-label="{{ status_label }}"
+     data-proj-id-display="{% if p.id %}{{ p.id | replace: '-', ' ' | upcase }}{% endif %}"
+     data-proj-year="{{ p.year }}"
+     data-proj-desc="{{ p.description | escape }}"
+     data-proj-stack="{{ p.stack | default: empty | jsonify | escape }}"
+     data-proj-tags="{{ p.tags | default: empty | jsonify | escape }}"
+     data-proj-github="{{ p.links.github | default: '' | escape }}"
+     data-proj-demo="{{ p.links.demo | default: '' | escape }}"
+     data-proj-paper="{{ p.links.paper | default: '' | escape }}">
+
+  <div class="tool-top">
+    <div>
+      <div class="tool-name">{{ p.name }}</div>
+      {%- if p.id or p.year -%}
+      <div class="tool-id">
+        {%- if p.id -%}{{ p.id | replace: "-", " " | upcase }}{%- endif -%}
+        {%- if p.id and p.year %} · {% endif -%}
+        {%- if p.year -%}{{ p.year }}{%- endif -%}
+      </div>
+      {%- endif -%}
+    </div>
+    <span class="tool-status {{ status }}">{{ status_label }}</span>
+  </div>
+
+  <p class="tool-desc">{{ p.description }}</p>
+
+  {%- if p.features and p.features.size > 0 -%}
+    <ul class="tool-feats">
+      {%- for feat in p.features -%}
+        <li class="tool-feat">{{ feat }}</li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+
+  <div class="tool-foot">
+    {%- if p.stack and p.stack.size > 0 -%}
+      <div class="tool-stack">
+        {%- for tech in p.stack -%}
+          <span class="stack">{{ tech }}</span>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="tool-stack"></div>
+    {%- endif -%}
+    <span class="tool-arrow" aria-hidden="true">↗</span>
+  </div>
+
+  {%- if p.tags and p.tags.size > 0 -%}
+    <div class="tool-tags">
+      {%- for tag in p.tags -%}
+        <span class="tool-tag">#{{ tag }}</span>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+</div>

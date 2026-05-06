@@ -1,0 +1,43 @@
+{%- comment -%}
+  Renders one credential card. Click opens the shared cert modal in
+  _includes/cert-modals.html, populated from these data attributes -
+  image is loaded from /assets/img/certs/{id}.png on click.
+
+  Usage: {% include cert-card.html cert=c variant="green" %}
+  variant is optional: "" (red/default) or "green" (for Pro Labs).
+{%- endcomment -%}
+
+{%- assign c = include.cert -%}
+{%- assign variant = include.variant | default: "" -%}
+{%- if variant == "green" -%}
+  {%- assign tag_label = "Pro Lab" -%}
+{%- else -%}
+  {%- assign tag_label = "Credential" -%}
+{%- endif -%}
+
+<div class="cert {{ variant }}"
+     data-cert="{{ c.id }}"
+     data-badge="{{ c.badge | escape }}"
+     data-name="{{ c.name | escape }}"
+     data-issuer="{{ c.issuer | escape }}"
+     data-date="{{ c.date | escape }}"
+     data-variant="{{ variant }}"
+     role="button"
+     tabindex="0"
+     aria-label="View {{ c.name | escape }} certificate">
+
+  <div class="cert-head">
+    <div class="cert-badge"{% if c.badge_size %} style="font-size:{{ c.badge_size }}"{% endif %}>{{ c.badge }}</div>
+    <span class="cert-tag">{{ tag_label }}</span>
+  </div>
+
+  <div class="cert-body">
+    <div class="cert-name">{{ c.name }}</div>
+    <div class="cert-issuer">{{ c.issuer }}</div>
+  </div>
+
+  <div class="cert-foot">
+    <span class="cert-date">{% if c.date %}{{ c.date }}{% endif %}</span>
+    <span class="cert-view">View <span class="cert-arrow">↗</span></span>
+  </div>
+</div>

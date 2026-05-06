@@ -1,0 +1,34 @@
+{%- comment -%}
+  Renders one row in a .wu-list.
+  Usage: {% include wu-row.html post=post index=idx %}
+  Inputs:
+    include.post  - a Jekyll page object from blogs/
+    include.index - 1-based index used to format #001 / #002 / ...
+{%- endcomment -%}
+
+{%- assign post = include.post -%}
+{%- assign parts = post.path | split: "/" -%}
+{%- assign cat_slug = parts[1] -%}
+{%- assign cat_display = cat_slug | replace: "-", " " | upcase -%}
+
+{%- capture wu_cat_class -%}{%- include wu-cat-class.html slug=cat_slug -%}{%- endcapture -%}
+{%- capture wu_diff_class -%}{%- include wu-diff-class.html level=post.difficulty -%}{%- endcapture -%}
+
+{%- assign padded_index = include.index | prepend: "000" -%}
+{%- assign padded_index = padded_index | slice: -3, 3 -%}
+
+{%- assign tag_str = "" -%}
+{%- if post.tags -%}{%- assign tag_str = post.tags | join: " " | downcase -%}{%- endif -%}
+
+<a href="{{ post.url | relative_url }}" class="wu" data-cat="{{ cat_display }}" data-title="{{ post.title | downcase }}" data-tags="{{ tag_str }}">
+  <span class="wu-idx">#{{ padded_index }}</span>
+  <span class="wu-date">{{ post.date | date: "%b %d" }}</span>
+  <div class="wu-body">
+    <div class="wu-title">{{ post.title }}</div>
+    <div class="wu-meta">
+      {%- if post.difficulty -%}<span class="wu-diff {{ wu_diff_class }}">{{ post.difficulty | upcase }}</span>{%- endif -%}
+      <span class="wu-cat {{ wu_cat_class }}"><span class="dot"></span>{{ cat_display }}</span>
+    </div>
+  </div>
+  <span class="wu-arrow">›</span>
+</a>

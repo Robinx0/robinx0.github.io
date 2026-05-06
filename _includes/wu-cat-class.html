@@ -1,0 +1,18 @@
+{%- comment -%}
+  Maps a blog category slug to the short CSS class used on .wu / .chip
+  (red-t / edr / bin / web / mob / mal / ctf / net / c2 / crev).
+  Usage: {% capture wu_cat_class %}{% include wu-cat-class.html slug=slug %}{% endcapture %}
+{%- endcomment -%}
+{%- case include.slug -%}
+{%- when 'red-team-ops' -%}red-t
+{%- when 'edr-bypass' -%}edr
+{%- when 'binary-exploitation' -%}bin
+{%- when 'web-exploitation' -%}web
+{%- when 'mobile-security' -%}mob
+{%- when 'malware-analysis' -%}mal
+{%- when 'ctf-writeups' -%}ctf
+{%- when 'network-security' -%}net
+{%- when 'c2-development' -%}c2
+{%- when 'cert-reviews' -%}crev
+{%- else -%}red-t
+{%- endcase -%}

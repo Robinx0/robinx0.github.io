@@ -1,0 +1,37 @@
+# ─────────────────────────────────────────────────────────────
+# SOCIAL LINKS - shown as op-pills (hero), bio-links (about),
+# footer socials. Single source of truth.
+#
+# icon: htb | github | linkedin | medium | email
+# show_in: subset of [op_pills, bio_links, footer]
+# ─────────────────────────────────────────────────────────────
+
+- name:    "HackTheBox"
+  handle:  "robinx0"
+  url:     "https://app.hackthebox.com/users/robinx0"
+  icon:    htb
+  show_in: [op_pills, bio_links, footer]
+
+- name:    "GitHub"
+  handle:  "robinx0"
+  url:     "https://github.com/robinx0"
+  icon:    github
+  show_in: [op_pills, bio_links, footer]
+
+- name:    "LinkedIn"
+  handle:  "robinary"
+  url:     "https://linkedin.com/in/robinary"
+  icon:    linkedin
+  show_in: [op_pills, bio_links, footer]
+
+- name:    "Medium"
+  handle:  "robinx0"
+  url:     "https://medium.com/@robinx0"
+  icon:    medium
+  show_in: [bio_links, footer]
+
+- name:    "Email"
+  handle:  "irfanmrobin@gmail.com"
+  url:     "mailto:irfanmrobin@gmail.com"
+  icon:    email
+  show_in: [bio_links]

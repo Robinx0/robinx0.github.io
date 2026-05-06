@@ -1,0 +1,38 @@
+# ─────────────────────────────────────────────────────────────
+# CERTIFICATIONS - top row of credential cards on /about.
+# Each cert is clickable and opens the modal defined in _includes/cert-modals.html
+# (keyed by `id`).
+#
+# badge_size: optional CSS override for long abbreviations like "eWPTX".
+# ─────────────────────────────────────────────────────────────
+
+- id:         crto
+  badge:      "CRTO"
+  name:       "Certified Red Team Operator"
+  issuer:     "Zero-Point Security"
+  date:       "Dec 2025"
+
+- id:         cpts
+  badge:      "CPTS"
+  name:       "Certified Penetration Testing Specialist"
+  issuer:     "HackTheBox"
+  date:       "May 2025"
+
+- id:         ewptx
+  badge:      "eWPTX"
+  badge_size: "9px"
+  name:       "Web App Pen Tester eXtreme"
+  issuer:     "INE Security"
+  date:       "Feb 2024"
+
+- id:         ecppt
+  badge:      "eCPPT"
+  name:       "Cert. Professional Penetration Tester"
+  issuer:     "INE Security"
+  date:       "Apr 2024"
+
+- id:         ejpt
+  badge:      "eJPT"
+  name:       "Junior Penetration Tester v2"
+  issuer:     "INE Security"
+  date:       "Mar 2024"

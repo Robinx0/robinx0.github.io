@@ -1,0 +1,163 @@
+---
+layout: default
+---
+{% assign parts = page.path | split: "/" %}
+{% assign cat = parts[1] %}
+{% assign cat_display = cat | replace: "-", " " | capitalize %}
+{% assign words = content | strip_html | number_of_words %}
+{% assign read_min = words | divided_by: 200 %}
+{% if read_min < 1 %}{% assign read_min = 1 %}{% endif %}
+
+{% capture diff_class %}{% include wu-diff-class.html level=page.difficulty %}{% endcapture %}
+{% assign diff_class = diff_class | strip %}
+
+{% assign all_posts = site.pages | where_exp: "p", "p.path contains 'blogs/'" | where_exp: "p", "p.name != 'index.md'" | sort: "date" | reverse %}
+
+{% comment %} prev/next within full chronology {% endcomment %}
+{% assign prev_post = nil %}
+{% assign next_post = nil %}
+{% for p in all_posts %}
+  {% if p.url == page.url %}
+    {% assign cur_idx = forloop.index0 %}
+    {% if cur_idx > 0 %}{% assign prev_idx = cur_idx | minus: 1 %}{% assign prev_post = all_posts[prev_idx] %}{% endif %}
+    {% assign next_idx = cur_idx | plus: 1 %}
+    {% if next_idx < all_posts.size %}{% assign next_post = all_posts[next_idx] %}{% endif %}
+  {% endif %}
+{% endfor %}
+
+{% comment %} series collection {% endcomment %}
+{% assign series_posts = nil %}
+{% if page.series %}
+  {% assign series_posts = all_posts | where: "series", page.series | sort: "series_part" %}
+{% endif %}
+
+{% comment %} related posts: same category, top 3 by date excluding current {% endcomment %}
+{% assign cat_posts = all_posts | where_exp: "p", "p.path contains cat" %}
+{% assign related = "" | split: "" %}
+{% for p in cat_posts %}
+  {% if p.url != page.url and related.size < 3 %}
+    {% assign related = related | push: p %}
+  {% endif %}
+{% endfor %}
+
+<div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+
+<article class="article">
+  <aside class="toc-side" id="toc-side" hidden>
+    {% if cat_display %}<div class="toc-cat">{{ cat_display }}</div>{% endif %}
+    <a href="#top" class="toc-title">{{ page.title }}</a>
+    <ol class="toc-list" id="toc-list-side"></ol>
+  </aside>
+
+  <div class="article-main">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <span class="bc-sep">/</span>
+      <a href="{{ '/writeups' | relative_url }}?cat={{ cat_display | url_encode }}">{{ cat_display }}</a>
+      <span class="bc-sep">/</span>
+      <span class="bc-current">{{ page.title | truncate: 48 }}</span>
+    </nav>
+
+    {% if page.series and series_posts.size > 0 %}
+      {% assign cur_part = 0 %}
+      {% for sp in series_posts %}{% if sp.url == page.url %}{% assign cur_part = forloop.index %}{% endif %}{% endfor %}
+      <div class="series-banner">
+        <span class="series-name">{{ page.series }}</span>
+        <span class="series-part">· Part {{ cur_part }} of {{ series_posts.size }}</span>
+      </div>
+    {% endif %}
+
+    <div class="article-meta">
+      {% if page.date %}<span>{{ page.date | date: "%b %d, %Y" }}</span>{% endif %}
+      {% if page.difficulty %}
+        <span class="wu-diff {{ diff_class }}">{{ page.difficulty | upcase }}</span>
+      {% endif %}
+      <span>· {{ read_min }} MIN READ</span>
+    </div>
+
+    <h1 id="top" class="article-title">{{ page.title }}</h1>
+    {% if page.description %}<p class="article-desc">{{ page.description }}</p>{% endif %}
+
+    {% if page.tags %}
+    <div class="article-tags">
+      {% for tag in page.tags %}<span class="pill">#{{ tag }}</span>{% endfor %}
+    </div>
+    {% endif %}
+
+    <div id="toc-inline" class="toc-inline" hidden>
+      <div class="toc-label">On this page</div>
+      <ol class="toc-list" id="toc-list-inline"></ol>
+    </div>
+
+    <div class="prose" id="post-content">
+      {{ content }}
+    </div>
+
+    {% if page.series and series_posts.size > 0 %}
+    <section class="series-card">
+      <div class="series-card-hdr">
+        <div>
+          <div class="series-card-name">{{ page.series }}</div>
+          <div class="series-part" style="margin-top:2px">{{ series_posts.size }} parts in this series</div>
+        </div>
+      </div>
+      <ol class="series-list">
+        {% for sp in series_posts %}
+          {% assign is_current = false %}
+          {% if sp.url == page.url %}{% assign is_current = true %}{% endif %}
+          <li class="series-item {% if is_current %}is-current{% endif %}">
+            <span class="series-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            {% if is_current %}
+              <span class="series-link">{{ sp.title }}</span>
+              <span class="series-now">You are here</span>
+            {% else %}
+              <a href="{{ sp.url | relative_url }}" class="series-link">{{ sp.title }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ol>
+    </section>
+    {% endif %}
+
+    {% if related.size > 0 %}
+    <section class="related">
+      <div class="label" style="margin-bottom:14px">Continue · {{ cat_display }}</div>
+      <div class="related-grid">
+        {% for r in related %}
+          {% capture r_diff_class %}{% include wu-diff-class.html level=r.difficulty %}{% endcapture %}
+          <a href="{{ r.url | relative_url }}" class="related-card">
+            <span class="related-date">{{ r.date | date: "%b %d, %Y" }}</span>
+            <span class="related-t">{{ r.title }}</span>
+            {% if r.description %}<span class="related-desc">{{ r.description | truncate: 90 }}</span>{% endif %}
+            {% if r.difficulty %}
+              <span class="wu-diff {{ r_diff_class | strip }}" style="align-self:flex-start">{{ r.difficulty | upcase }}</span>
+            {% endif %}
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    {% if prev_post or next_post %}
+    <nav class="post-nav" aria-label="Post navigation">
+      {% if prev_post %}
+        <a href="{{ prev_post.url | relative_url }}" class="post-nav-card pn-prev">
+          <span class="pn-dir">← Newer</span>
+          <span class="pn-title">{{ prev_post.title }}</span>
+        </a>
+      {% else %}<span></span>{% endif %}
+      {% if next_post %}
+        <a href="{{ next_post.url | relative_url }}" class="post-nav-card pn-next">
+          <span class="pn-dir">Older →</span>
+          <span class="pn-title">{{ next_post.title }}</span>
+        </a>
+      {% else %}<span></span>{% endif %}
+    </nav>
+    {% endif %}
+
+    <div class="article-foot">
+      <a href="{{ '/' | relative_url }}" class="btn-g">← Home</a>
+      <a href="{{ '/writeups' | relative_url }}?cat={{ cat_display | url_encode }}" class="btn-g">More {{ cat_display }} →</a>
+    </div>
+  </div>
+</article>

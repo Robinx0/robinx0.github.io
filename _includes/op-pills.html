@@ -1,0 +1,15 @@
+{%- comment -%}
+  Renders the row of social pills in the operator card.
+  Pulls from _data/socials.yml, filtered by `show_in` flag.
+{%- endcomment -%}
+
+<div class="op-socials">
+  {%- for social in site.data.socials -%}
+    {%- if social.show_in contains "op_pills" -%}
+      <a href="{{ social.url }}" class="op-pill" target="_blank" rel="noopener">
+        {% include svg-icon.html icon=social.icon %}
+        {{ social.handle }}
+      </a>
+    {%- endif -%}
+  {%- endfor -%}
+</div>

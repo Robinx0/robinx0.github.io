@@ -1,0 +1,51 @@
+# ─────────────────────────────────────────────────────────────
+# SKILLS MATRIX - one card per `heading`, items rendered as pill tags.
+# ─────────────────────────────────────────────────────────────
+
+- heading: "Offensive domains"
+  items:
+    - "Pentest (mobile / network / AD)"
+    - "EDR / AV evasion"
+    - "Malware dev & analysis"
+    - "Reverse engineering"
+    - "Source-code review"
+    - "Red teaming"
+    - "OSINT"
+    - "OWASP Top 10"
+
+- heading: "Security tools"
+  items:
+    - "Cobalt Strike"
+    - "Sliver C2"
+    - "Burp Suite Pro"
+    - "BloodHound"
+    - "Rubeus"
+    - "Mimikatz"
+    - "Impacket"
+    - "Ghidra / IDA"
+    - "Nmap / Nuclei"
+    - "MobSF"
+    - "Pwntools / Frida"
+    - "Acunetix / Nessus"
+    - "Wazuh / Suricata"
+
+- heading: "Languages & frameworks"
+  items:
+    - "C / C++"
+    - "Python"
+    - "JavaScript / TS"
+    - "Swift"
+    - "SQL"
+    - "React.js"
+    - "Express.js"
+    - "React Native"
+
+- heading: "Dev & infra"
+  items:
+    - "Git"
+    - "Docker"
+    - "PostgreSQL"
+    - "Redis"
+    - "AWS"
+    - "GCP"
+    - "Kali Linux"

@@ -1,0 +1,29 @@
+# ─────────────────────────────────────────────────────────────
+# HTB PRO LABS - rendered as green cert cards.
+# ─────────────────────────────────────────────────────────────
+- id:         aptlabs
+  badge:      "APT"
+  badge_size: "8.5px"
+  name:       "APTlabs Pro Lab"
+  issuer:     "HackTheBox"
+  date:       "April 2026"
+  
+- id:         dante
+  badge:      "DANTE"
+  name:       "Dante Pro Lab"
+  issuer:     "HackTheBox"
+  date:       "Feb 2026"
+
+- id:         rastalabs
+  badge:      "RASTA"
+  badge_size: "8.5px"
+  name:       "Rastalabs Pro Lab"
+  issuer:     "HackTheBox"
+  date:       "Dec 2025"
+
+- id:         ascension
+  badge:      "ASC."
+  badge_size: "8.5px"
+  name:       "Ascension Pro Lab"
+  issuer:     "HackTheBox"
+  date:       "Dec 2025"
