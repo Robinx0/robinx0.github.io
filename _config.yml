@@ -8,7 +8,7 @@ description: "Offensive Security Research · Red Team Ops · Writeups"
 tagline:     "Breaking things. Documenting everything."
 author:      "Irfanul Montasir"   # used by jekyll-seo-tag metadata
 
-url:         ""
+url:         "https://robinx0.github.io"
 baseurl:     ""
 
 # Profile photo - drop a JPG/PNG at this path (e.g. /assets/img/profile.jpg)
