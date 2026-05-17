@@ -46,21 +46,26 @@
 sitemap: false
  
 projects:
-  - name: "NoteNyx"
+  - name: "Lacunex"
     id: notenyx
-    status: alpha
+    status: Community Edition v1
     year: 2026
     featured: true
-    description: "Electron-packaged knowledge workspace built for offensive security work. Markdown notes with a force-directed graph view, BloodHound AD viewer, and an integrated terminal in a single split-pane interface."
+    description: "The Community edition holds Local-first desktop report builder for pentesters, auditors, and consultants. Block editor, severity-aware findings, 10 ready-made templates, 6 cover designs, optional local Ollama AI. Exports to PDF, HTML, Markdown, Word, and SysReptor JSON. Reports stay on your machine - no cloud, no telemetry, no account."
     features:
-      - "Markdown editor with graph view"
-      - "BloodHound AD relationship viewer"
-      - "Integrated terminal pane"
-      - "Liquid Glass macOS icon system"
+      - "Local-first pentest report builder"
+      - "Block-style editor for findings and evidence"
+      - "Severity-aware vulnerability tracking"
+      - "Built-in report templates for audits, incidents, and exams"
+      - "One-click export to PDF, HTML, Markdown, DOCX, and JSON"
+      - "Custom cover pages with live preview"
+      - "Screenshot and attachment handling"
+      - "Optional local AI assist through Ollama"
+    
     stack: [Electron, React, Vite, TypeScript]
-    tags: [pentest, tooling, knowledge-base]
+    tags: [pentest, reporting, audits, local-first, security-tooling]
     links:
-      github: "https://github.com/robinx0/notenyx"
+      github: "https://github.com/robinx0/lacunex-community"
  
   - name: "allspray"
     id: allspray
