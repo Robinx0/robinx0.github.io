@@ -19,9 +19,9 @@
   label:    "Writeups published"
   show_on:  [about]   # home doesn't show this one
 
-- value:     "05"
+- value:     "06"
   label:     "Certifications"
-  sub_label: "CRTO · CPTS · eWPTX<br>eCPPT · eJPT"
+  sub_label: "OSCP · CRTO · CPTS<br>eWPTX · eCPPT · eJPT"
 
 - value:     "04"
   label:     "HTB pro labs"
