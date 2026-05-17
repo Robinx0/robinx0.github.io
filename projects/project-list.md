@@ -47,7 +47,7 @@ sitemap: false
  
 projects:
   - name: "Lacunex"
-    id: notenyx
+    id: lacunex
     status: Community Edition v1
     year: 2026
     featured: true
