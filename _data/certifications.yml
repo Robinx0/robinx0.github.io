@@ -5,7 +5,12 @@
 #
 # badge_size: optional CSS override for long abbreviations like "eWPTX".
 # ─────────────────────────────────────────────────────────────
-
+- id:         oscp
+  badge:      "OSCP"
+  name:       "OFFSEC CERTIFIED PROFESSIONAL"
+  issuer:     "OFFSEC(Offensive Security)"
+  date:       "May 2026"
+  
 - id:         crto
   badge:      "CRTO"
   name:       "Certified Red Team Operator"
