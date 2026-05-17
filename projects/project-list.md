@@ -46,9 +46,9 @@
 sitemap: false
  
 projects:
-  - name: "Lacunex"
+  - name: "Lacunex CE"
     id: lacunex
-    status: Community Edition v1
+    status: ok
     year: 2026
     featured: true
     description: "The Community edition holds Local-first desktop report builder for pentesters, auditors, and consultants. Block editor, severity-aware findings, 10 ready-made templates, 6 cover designs, optional local Ollama AI. Exports to PDF, HTML, Markdown, Word, and JSON. Reports stay on your machine - no cloud, no telemetry, no account."
