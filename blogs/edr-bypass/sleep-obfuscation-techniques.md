@@ -7,6 +7,8 @@ tags: [sleep-obfuscation, ekko, zilean, foliage, edr-evasion, opsec]
 image: "https://robinx0.github.io/assets/img/sleep-obf.png"
 ---
 
+![Sleep Obfuscation Deep Dive: Ekko, Zilean, and Foliage](/assets/img/sleep-obf.png)
+
 ## The Problem: Your Implant Is Naked in Memory
  
 A running implant has a fundamental exposure window. Between callbacks, it sits idle in process memory — its configuration, strings, and shellcode in plaintext. Modern EDR products exploit this window with **periodic memory scanning**: every 30–120 seconds, they walk process virtual address space looking for byte patterns via YARA rules, signature hashes, or ML classifiers. A Cobalt Strike beacon with its default config block and string table sitting in a `PAGE_EXECUTE_READ` region is trivially flagged, even if it's doing absolutely nothing at the time.
